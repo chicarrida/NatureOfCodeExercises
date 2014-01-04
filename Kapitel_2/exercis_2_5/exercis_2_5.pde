@@ -3,7 +3,7 @@ PVector gravity;
 float perlin = 0.004;
 float noiseVal;
 Mover[] movers;
-float fCoeff = 0.1;
+float fCoeff = 0.02;
 
 void setup(){
    size(600, 400);   
@@ -28,11 +28,14 @@ void draw(){
  //mover.applyForce(wind);
 if(inRect(mover.location))
 { 
-   PVector friction = mover.velocity.get();
+  fCoeff = 0.15;
+}else{
+  fCoeff = 0.02;
+}
+  PVector friction = mover.velocity.get();
   friction.normalize();
   friction.mult(-fCoeff);
   mover.applyForce(friction);
-}
   mover.update();
   mover.render();
   mover.checkEdges();
